@@ -4,23 +4,138 @@ html, body {
     overscroll-behavior: none;
     overflow: hidden;
     height: 100vh;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    color: #555;
 }
 
+/* Page Area */
 .page-area {
     height: 100vh;
 }
-
 .content-area {
     height: 100vh;
     position: relative;
 }
 
-.menu-area {
+/* Top Menu Area */
+.top-menu-area {
+    z-index: 1;
     position: absolute;
-    height: 100vh;
-    width: 200px;
+    height: 110px;
+    top: 20px;
+    left: 150px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding: 10px;
+    width: 800px;
+}
+.scale-area {
+    border-right: 1px dashed lightgrey;
+    padding-right: 20px;
+}
+.scale-area>div:nth-child(1), .scale-area>div:nth-child(2) {
+    margin-bottom: 10px;
+}
+.update-button {
+    padding: 10px;
+    background: lightgrey;
+    transition: background 0.2s linear;
+    width: 60px;
+    text-align: center;
+}
+.update-button:hover {
+    cursor: pointer;
+    background: grey;
+}
+.recent-area {
+    padding-left: 10px;
+}
+.recent-area>div:nth-child(1) {
+    margin-bottom: 10px;
+}
+.recent-tiles {
+    display: flex;
+    flex-wrap: wrap;
+}
+.recent-tile {
+    height: 30px;
+    width: 30px;
+    background: grey;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.recent-tile:hover {
+    cursor: pointer;
 }
 
+/* Side Menu Area */
+.side-menu-area {
+    z-index: 1;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 110px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding-bottom: 20px;
+}
+.side-button-area {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    border-bottom: 1px dashed lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.menu-button-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-button {
+    height: 40px;
+    width: 80px;
+    background: lightgrey;
+    transition: background 0.2s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-button:hover {
+    cursor: pointer;
+    background: grey;
+}
+.menu-button.wide {
+    width: 80px;
+}
+.select-text {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.current-tile-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.current-tile {
+    height: 50px;
+    width: 50px;
+    background: lightgrey;
+}
+.hex-area .menu-button:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+.top-menu-area, .side-menu-area {
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+}
+
+/* Grid Area */
 .grid-area {
     position: absolute;
     top: 0px; right: 0px; bottom: 0px; left: 0px;
@@ -28,7 +143,6 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-
 .grid-container {
     position: relative;
 }
@@ -45,7 +159,6 @@ html, body {
     z-index: -1;
     top: 0px; right: 0px; bottom: 0px; left: 0px;
 }
-
 .grid-cell {
     border-right: 1px dashed #aaa;
     border-bottom: 1px dashed #aaa;
@@ -54,4 +167,13 @@ html, body {
 .grid-cell:hover {
     background: lightgrey;
     cursor: pointer;
+}
+
+/* Menu Buttons */
+
+
+/* Other */
+.center {
+    display: flex;
+    justify-content: center;
 }
