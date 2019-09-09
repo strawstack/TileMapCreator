@@ -153,13 +153,10 @@ html, body {
     grid-template-rows: repeat(16, 25px);
     grid-template-columns: repeat(16, 25px);
 }
-.svg-container {
-    pointer-events: none;
-    position: absolute;
-    z-index: -1;
-    top: 0px; right: 0px; bottom: 0px; left: 0px;
-}
 svg {
+    pointer-events: none;
+    z-index: -1;
+    position: absolute;
     top: 0px; right: 0px; bottom: 0px; left: 0px;
 }
 .grid-cell {

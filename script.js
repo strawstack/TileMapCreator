@@ -200,19 +200,17 @@ function renderState(state) {
 
     // Place grid
     for (let i=0; i < state.p.rows * state.p.cols; i++) {
-        let cell = makeGridCell(state, Math.floor(i / state.p.rows), i % state.p.cols);
+        let cell = makeGridCell(state, Math.floor(i / state.p.cols), i % state.p.cols);
         bindEventListeners(cell);
         grid.appendChild(cell);
     }
-
-    console.log(state);
 
     // Place tiles in svg
     for (let key in state.p.grid) {
         let tile = state.p.grid[key];
         // Update in-case grid dimensions or size change
         tile.setAttributeNS(null, "x", tile.dataset.col * state.p.cell.size);
-        tile.setAttributeNS(null, "y",tile.dataset.row * state.p.cell.size);
+        tile.setAttributeNS(null, "y", tile.dataset.row * state.p.cell.size);
         tile.setAttributeNS(null, "width", state.p.cell.size);
         tile.setAttributeNS(null, "height", state.p.cell.size);
         svg.appendChild(tile);
@@ -221,9 +219,9 @@ function renderState(state) {
     // Set svg viewbox resolution and size
     let h = state.p.rows * state.p.cell.size;
     let w = state.p.cols * state.p.cell.size;
-    svg.setAttribute("viewBox", `0 0 ${h} ${w}`);
-    svg.width = w;
-    svg.height = h;
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("width", w);
+    svg.setAttribute("height", h);
 
     // Gridlines state
     document.querySelector(".grid-cell-container").style.opacity = (state.p.showGrid)?1:0;
@@ -276,9 +274,9 @@ function main(state) {
         let cols = document.querySelector("#cols-input").value;
         let size = document.querySelector("#size-input").value;
         let _state = getState();
-        _state.p.rows = rows;
-        _state.p.cols = cols;
-        _state.p.cell.size = size;
+        _state.p.rows = parseInt(rows);
+        _state.p.cols = parseInt(cols);
+        _state.p.cell.size = parseInt(size);
         pushState(_state);
         renderState(_state);
     });
