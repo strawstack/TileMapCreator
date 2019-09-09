@@ -15,16 +15,19 @@ A single file tile map creator that lets you copy SVG data on creation
 - [x] Click places a tile
 - [x] One state object
 - [x] Event driven
+- [x] Design buttons for menu area
+- [x] Working erase button
+- [x] Render buttons from state
+- [x] Menu area hovers left side of the screen, two columns of icon buttons
 
-- [ ] Design buttons for menu area
-- [ ] Render buttons from state
-- [ ] Menu area hovers left side of the screen, two columns of icon buttons
-    - [ ] Button name appears on hover
+- [ ] Working import button
+- [ ] Working base64 button
+
 - [ ] Tiles can be textured with a 64 bit string of a 100x100 to 800x800 image
     - [ ] Menu button pops up window asking for string
     - [ ] Place new texture in recently used colors area
-- [ ] Shift-click edits tile meta-data
 
+- [ ] Shift-click edits tile meta-data
 - [ ] Mouse scroll zooms in and out
 - [ ] Mouse pan scrolls view
 

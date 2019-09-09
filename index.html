@@ -13,13 +13,13 @@
                 <div class="scale-area">
                     <div>
                         <span>Dimensions:&nbsp;</span>
-                            <input type="text" name="rows" id="rows-input">
+                            <input type="text" name="rows" id="rows-input" value="16">
                             &nbsp;x&nbsp;
-                            <input type="text" name="cols" id="cols-input">
+                            <input type="text" name="cols" id="cols-input" value="16">
                     </div>
                     <div>
                         <span>Tile Size:&nbsp;</span>
-                            <input type="text" name="size" id="size-input">
+                            <input type="text" name="size" id="size-input" value="25">
                     </div>
                     <div>
                         <div class="update-button">Update</div>
@@ -28,36 +28,36 @@
                 <div class="recent-area">
                     <div>Recent Tiles</div>
                     <div class="recent-tiles">
-                        <div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div>
+                        <div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div><div class="recent-tile"></div>
                     </div>
                 </div>
             </div>
             <div class="side-menu-area">
                 <div class="side-button-area">
                     <div class="menu-button-area">
-                        <div class="menu-button"></div>
+                        <div class="menu-button">Undo</div>
                     </div>
                     <div class="menu-button-area">
-                        <div class="menu-button"></div>
+                        <div class="menu-button gridlines">Gridlines</div>
                     </div>
                     <div class="menu-button-area">
-                        <div class="menu-button"></div>
+                        <div class="menu-button erase">Erase</div>
                     </div>
                     <div class="menu-button-area">
-                        <div class="menu-button"></div>
+                        <div class="menu-button">Import</div>
                     </div>
                     <div class="menu-button-area">
-                        <div class="menu-button"></div>
+                        <div class="menu-button export">Export</div>
                     </div>
                 </div>
                 <div class="select-area">
                     <div class="select-text">Current Tile</div>
                     <div class="current-tile-area">
-                        <div class="current-tile"></div>
+                        <input type="color" class="current-tile" name="color" value="#777777">
                     </div>
                     <div class="hex-area">
                         <div class="menu-button-area wide">
-                            <div class="menu-button wide">Hex</div>
+                            <div class="menu-button wide hex">Hex</div>
                         </div>
                     </div>
                     <div class="base64-area">
@@ -80,5 +80,6 @@
             </div>
         </div>
     </div>
+    <textarea class="export-container"></textarea>
 </body>
 </html>

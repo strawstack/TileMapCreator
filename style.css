@@ -124,7 +124,7 @@ html, body {
 .current-tile {
     height: 50px;
     width: 50px;
-    background: lightgrey;
+    cursor: pointer;
 }
 .hex-area .menu-button:nth-child(1) {
     margin-bottom: 10px;
@@ -159,6 +159,9 @@ html, body {
     z-index: -1;
     top: 0px; right: 0px; bottom: 0px; left: 0px;
 }
+svg {
+    top: 0px; right: 0px; bottom: 0px; left: 0px;
+}
 .grid-cell {
     border-right: 1px dashed #aaa;
     border-bottom: 1px dashed #aaa;
@@ -176,4 +179,7 @@ html, body {
 .center {
     display: flex;
     justify-content: center;
+}
+.export-container {
+    opacity: 0;
 }
