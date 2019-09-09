@@ -5,7 +5,7 @@ class State {
             "cols": 16,
             "cell": {
                 "size": 25, // pixels
-                "color": "#777"
+                "color": "#777777"
             },
             "grid": {},
             "mouse": {
@@ -13,7 +13,8 @@ class State {
                 "isDown": false
             },
             "showGrid": true,
-            "erase": false
+            "erase": false,
+            "recentTiles": []
         };
     }
     copyGrid() {
@@ -38,7 +39,8 @@ class State {
                 "isDown": this.p.mouse.isDown
             },
             "showGrid": this.p.showGrid,
-            "erase": this.p.erase
+            "erase": this.p.erase,
+            "recentTiles": this.p.recentTiles
         }
         return new_state;
     }
@@ -83,7 +85,21 @@ function action_removeTile(state, tile) {
     delete new_state.p.grid[key];
     return new_state;
 }
+function action_recentTile(state, tile) {
+    let new_state = state.copy();
+    let recentTiles = new_state.p.recentTiles;
+    if (recentTiles.length >= 18) new_state.p.recentTiles.pop();
 
+    // Only insert the tile if the previous one is a different color
+    if (recentTiles.length > 0) {
+        if (tile.getAttribute("fill") !== recentTiles[0].getAttribute("fill")) {
+            new_state.p.recentTiles.unshift(tile.cloneNode(false));
+        }
+    } else {
+        new_state.p.recentTiles.unshift(tile.cloneNode(false));
+    }
+    return new_state;
+}
 function _action_clearGrid(state) {
     let new_state = state.copy();
     new_state.p.grid = [];
@@ -119,7 +135,12 @@ function makeGridCell(state, row, col) {
     div.style.width  = state.p.cell.size - 1 + "px";
     return div;
 }
-
+function makeRecentTile(tile) {
+    let div = document.createElement("div");
+    div.className = "recent-tile"
+    div.style.background = tile.getAttribute("fill");
+    return div;
+}
 function makeTile(state, row, col) {
     var n = "http://www.w3.org/2000/svg";
     let tile = document.createElementNS(n, "rect");
@@ -131,6 +152,18 @@ function makeTile(state, row, col) {
     tile.setAttributeNS(null, "height", state.p.cell.size);
     tile.setAttributeNS(null, "fill", state.p.cell.color);
     return tile;
+}
+function RGBToHex(r, g, b) {
+  r = r.toString(16);
+  g = g.toString(16);
+  b = b.toString(16);
+  if (r.length == 1)
+    r = "0" + r;
+  if (g.length == 1)
+    g = "0" + g;
+  if (b.length == 1)
+    b = "0" + b;
+  return "#" + r + g + b;
 }
 function clickEvent(e) {
     let _state = getState();
@@ -148,6 +181,7 @@ function clickEvent(e) {
         // Add the tile if it does not exist
         if (!stateHasTile(_state, tile)) {
             _state = action_addTile(_state, tile);
+            _state = action_recentTile(_state, tile);
         }
     }
 
@@ -225,6 +259,28 @@ function renderState(state) {
 
     // Gridlines state
     document.querySelector(".grid-cell-container").style.opacity = (state.p.showGrid)?1:0;
+    document.querySelector(".menu-button.erase").style.background = (state.p.erase)?"lightsalmon":"lightgrey";
+
+    // Clear recent tiles
+    let recent = document.querySelector(".recent-tiles");
+    while (recent.firstChild) {
+        recent.removeChild(recent.firstChild);
+    }
+
+    // Add recent tiles
+    for (let tile of state.p.recentTiles) {
+        let rt = makeRecentTile(tile);
+        rt.addEventListener('click', (e) => {
+            let c = rt.style.background.substring(4).split(",").map(x => parseInt(x));
+            let color = RGBToHex(c[0], c[1], c[2]);
+            document.querySelector(".current-tile").value = color;
+            let _state = getState();
+            _state.p.cell.color = color;
+            pushState(_state);
+            renderState(_state);
+        });
+        recent.appendChild(rt);
+    }
 }
 
 function main(state) {
@@ -252,16 +308,18 @@ function main(state) {
     });
 
     document.querySelector(".menu-button.export").addEventListener('click', (e) => {
-        let text = document.querySelector(".svg-container").innerHTML;
+        let text = document.querySelector("#svg").outerHTML;
         let input = document.querySelector(".export-container");
         input.value = text;
         input.select();
         document.execCommand("copy");
+        alert("SVG tile map copied to clipboard!");
     });
 
     document.querySelector(".menu-button.hex").addEventListener('click', (e) => {
         let hex = prompt("Enter hex value", "34a45b");
         let color = "#" + hex;
+        if (hex === null) color = "#777777";
         document.querySelector(".current-tile").value = color;
         let _state = getState();
         _state.p.cell.color = color;
