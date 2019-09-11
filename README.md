@@ -20,6 +20,11 @@ A single file tile map creator that lets you copy SVG data on creation
 - [x] Render buttons from state
 - [x] Menu area hovers left side of the screen, two columns of icon buttons
 
+- [ ] Create a public git repo
+    - [ ] Documentation in form of a readme
+    - [ ] Host on gh-pages
+    - [ ] Forward from tiles.rhay.es url
+
 - [ ] Working import button
 - [ ] Working base64 button
 
@@ -33,14 +38,14 @@ A single file tile map creator that lets you copy SVG data on creation
 
 # UI
 
-- [ ] Current tile display
-- [ ] Color selector
-- [ ] Recent tiles
+- [x] Current tile display
+- [x] Color selector
+- [x] Recent tiles
 
-- [ ] Copy HTML to clipboard button (copy the colored cell group to clipboard)
-- [ ] Specify voxel size
-- [ ] Specify x and y dimensions
+- [x] Copy HTML to clipboard button (copy the colored cell group to clipboard)
+- [x] Specify voxel size
+- [x] Specify x and y dimensions
 
-- [ ] Show/hide gridlines option
-- [ ] Toggle on eraser
+- [x] Show/hide gridlines option
+- [x] Toggle on eraser
 - [ ] Undo button
