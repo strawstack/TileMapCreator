@@ -4,7 +4,7 @@ An `extremely portable` browser-based tile map creator tool built inside one htm
 
 # How to Use
 
-Use this tool online [here](https://strawstack.github.io/TileMapCreator/) or simply download the `creator.html` file and open it in any browser anywhere!
+Use this tool online [here](https://strawstack.github.io/TileMapCreator/) or simply download the `creator.html` file and open it in any browser anywhere! See `documentation` below. 
 
 # Screenshot
 
