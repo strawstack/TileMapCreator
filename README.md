@@ -8,6 +8,6 @@ Use this tool online [here](https://strawstack.github.io/TileMapCreator/) or sim
 
 # Screenshot
 
-![](./screenshot.png)
+[![](./screenshot.png)](https://strawstack.github.io/TileMapCreator/)
 
 # Documentation
