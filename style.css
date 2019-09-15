@@ -83,7 +83,7 @@ html, body {
 .side-button-area {
     display: grid;
     grid-row-gap: 10px;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr;
     border-bottom: 1px dashed lightgrey;
     padding-top: 10px;
@@ -170,7 +170,9 @@ svg {
 }
 
 /* Menu Buttons */
-
+.menu-button {
+    user-select: none;
+}
 
 /* Other */
 .center {
@@ -179,4 +181,11 @@ svg {
 }
 .export-container {
     opacity: 0;
+}
+.spacer-vertical {
+    height: 50px;
+}
+.creator-area a {
+    text-decoration: none;
+    color: white;
 }

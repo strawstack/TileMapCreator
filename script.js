@@ -50,10 +50,12 @@ class State {
 * Global state
 */
 let _state = new State();
+let undo = [_state];
 function getState() {
-    return _state;
+    return _state.copy();
 }
 function pushState(state) {
+    state = state.copy();
     _state.p = state.p;
 }
 
@@ -165,8 +167,8 @@ function RGBToHex(r, g, b) {
     b = "0" + b;
   return "#" + r + g + b;
 }
-function clickEvent(e) {
-    let _state = getState();
+function clickEvent(e, _state) {
+
     let row = e.target.dataset.row;
     let col = e.target.dataset.col;
     let tile = makeTile(_state, row, col);
@@ -184,12 +186,9 @@ function clickEvent(e) {
             _state = action_recentTile(_state, tile);
         }
     }
-
-    pushState(_state);
-    renderState(_state);
+    return _state;
 }
 function bindEventListeners(cell) {
-    cell.addEventListener('click', (e) => clickEvent(e));
     cell.addEventListener('mousedown', (e) => {
         let _state = getState();
         _state.p.mouse.isDown = true;
@@ -199,17 +198,36 @@ function bindEventListeners(cell) {
     cell.addEventListener('mouseup', (e) => {
         let _state = getState();
         if (e.target.isSameNode(_state.p.mouse.target)) {
-            clickEvent(e);
+            let before_state = _state.copy();
+            _state = clickEvent(e, _state);
+            if (Object.keys(before_state.p.grid).length !== Object.keys(_state.p.grid).length) {
+                before_state.p.mouse.isDown = false;
+                before_state.p.mouse.target = undefined;
+                _ = undoPush(before_state);
+            }
         }
         _state.p.mouse.isDown = false;
         _state.p.mouse.target = undefined;
         pushState(_state);
+        renderState(_state);
     });
     cell.addEventListener('mousemove', (e) => {
-        if (getState().p.mouse.isDown) {
-            clickEvent(e);
+        let _state = getState();
+        if (_state.p.mouse.isDown) {
+            let before_state = _state.copy();
+            _state = clickEvent(e, _state);
+            if (Object.keys(before_state.p.grid).length !== Object.keys(_state.p.grid).length) {
+                before_state.p.mouse.isDown = false;
+                _ = undoPush(before_state);
+            }
         }
+        pushState(_state);
+        renderState(_state);
     });
+}
+function undoPush(state) {
+    undo.push(state);
+    return state.copy();
 }
 
 function renderState(state) {
@@ -281,6 +299,9 @@ function renderState(state) {
         });
         recent.appendChild(rt);
     }
+
+    // Set current color
+    document.querySelector(".current-tile").value = _state.p.cell.color;
 }
 
 function main(state) {
@@ -288,6 +309,7 @@ function main(state) {
     state.p.cell.color = document.querySelector(".current-tile").value;
     document.querySelector(".current-tile").addEventListener('change', (e) => {
         let _state = getState();
+        _state = undoPush(_state);
         _state.p.cell.color = e.target.value;
         pushState(_state);
         renderState(_state);
@@ -322,6 +344,7 @@ function main(state) {
         if (hex === null) color = "#777777";
         document.querySelector(".current-tile").value = color;
         let _state = getState();
+        _state = undoPush(_state);
         _state.p.cell.color = color;
         pushState(_state);
         renderState(_state);
@@ -332,11 +355,20 @@ function main(state) {
         let cols = document.querySelector("#cols-input").value;
         let size = document.querySelector("#size-input").value;
         let _state = getState();
+        _state = undoPush(_state);
         _state.p.rows = parseInt(rows);
         _state.p.cols = parseInt(cols);
         _state.p.cell.size = parseInt(size);
         pushState(_state);
         renderState(_state);
+    });
+
+    document.querySelector(".menu-button.undo").addEventListener('click', (e) => {
+        if (undo.length > 1) {
+            let new_state = undo.pop();
+            pushState(new_state);
+            renderState(new_state);
+        }
     });
 
     renderState(state);

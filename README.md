@@ -1,6 +1,6 @@
 # TileMapCreator
 
-A single file tile map creator that lets you copy SVG data on creation
+Create SVG tile maps for your projects, games, and art with a capable tile map application inside a single file.
 
 # TODO
 
