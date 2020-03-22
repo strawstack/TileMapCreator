@@ -4,7 +4,11 @@ An `extremely portable` `browser-based` `tile-map creator` tool built inside one
 
 # How to Use
 
-Use this tool online [here](https://strawstack.github.io/TileMapCreator/) or simply download [creator.html](https://github.com/strawstack/TileMapCreator/blob/master/creator.html) and open it in any browser anywhere! See `Documentation` section below for controls. 
+Use this tool online [here](https://strawstack.github.io/TileMapCreator/) or download [creator.html](https://github.com/strawstack/TileMapCreator/blob/master/creator.html) and open it in any browser anywhere! See `Documentation` section below for controls. 
+
+# Live Demo
+
+[View Live Demo](https://strawstack.github.io/TileMapCreator/)
 
 # Screenshot
 
